@@ -1,0 +1,237 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct dados
+{
+  int info;
+  struct dados *prox;
+};
+
+typedef struct dados Dados;
+typedef Dados* Hash[tam];
+
+int fuçaoHash(int num){
+
+    return(num%tam);
+
+}
+
+void inicializarHash(Hash tab){
+
+    for(int i; i < tam; i++){
+
+        tam[i] = null;
+
+    }
+}
+
+void inserirHash(Hash tab, int num){
+
+    int i = 0;
+    int chave = funçaoHash(num);
+    Dados* aux = tab[chave];
+    while(aux != null){
+
+        if(aux->info == null){
+
+            break;
+
+        }
+
+       aux = aux->prox;
+    }
+
+    if(aux == null){
+
+        aux = (Dados*)malloc(sizeof(Dados));
+        aux->info = num;
+        aux->prox = tab[chave];
+        tab[chave] = aux;
+
+    }
+}
+
+void imprimeHash(Hash tab){
+
+    int i = 0, count = 0;
+    for(int i = 0; i < tam; i++){
+
+        if(tab[i] = null){
+
+            print("\n %d", tab[i]->info);
+            Dados* aux = tab[i]->prox;
+
+            while(aux != null){
+
+                printf(" -> %3d", aux->info);
+                aux = aux->prox;
+
+            }
+        }
+    }
+}
+
+void imprimeColisao(Hash tab, int pos){
+
+    Dados* aux = tab[pos];
+    if(aux == null){
+
+        printf("\n Esta posiçao esta vazia");
+
+      return;
+    }
+
+    else{
+
+        if(aux != null){
+
+            printf("3d", aux->info);
+            while(aux->prox != null){
+
+                printf(" -> %d", aux->prox->info);
+                aux = aux->prox;
+            }
+        }
+    }
+}
+
+void buscaHash(Hash tab, int num){
+
+    int pos = num;
+    if(num < tam || num < 0){
+
+        printf("\nPosiçao nao encontrada");
+
+      return;
+    }
+    else{
+
+
+        imprimeColisao(tab,pos);
+
+    }
+}
+
+void removeHash(Hash tab, int num){
+
+    int pos = num;
+    int ex;
+    if(num < tam){
+
+        printf("\nEssa posiçao nao existe na tabela");
+
+    }
+
+    else{
+
+        if(tab[pos] == null){
+
+            printf("\n Esta chave esta vazia");
+
+        }
+
+        else{
+
+            printf("\n\n\n");
+            imprimeColisao(tab,pos);
+            printf("\nQual registro deseja apagar = ")
+            scanf("%d", &ex);
+
+            if(tab[pos]-> info == ex){
+
+                if(tab[pos]->prox){
+
+                    tab[pos] = null;
+                    return;
+                }
+
+                if(tab[pos]->prox != null){
+
+                    tab[pos]-> info = tab[pos]->prox->info;
+                    tab[pos]->prox = tab[pos]->prox->prox;
+                    return;
+                }
+                }
+                else{
+
+                   if(tab[pos]->info != ex){
+
+                        if(tab[pos]->prox == null){
+
+                            printf("\nRegistro nao encontrado");
+                            getch();
+                            return;
+                        }
+                    else{
+
+                        Dados* ant = null;
+                        Dados* aux = tab[pos]->prox;
+
+                        while(aux->prox != null && aux->info != ex){
+
+                            ant = aux;
+                            aux = aux->prox;
+
+                        }
+
+                        if(aux->info != ex){
+
+                            printf("\nRegistro nao encontrado\n");
+                            return;
+
+                        }
+                        else {
+
+                            ant->prox = aux->prox;
+
+                        }
+
+                        aux = null;
+                        free(aux);
+                    }
+
+                   }
+
+                }
+            }
+        }
+    }
+
+    int main(){
+
+        Hash tab;
+        int p;
+        int a,b,c,d,e,f,g,h;
+
+        printf("1: Inserir Hash");
+        printf("2: Remover Hash");
+        printf("3: Imprimir hash");
+        printf("4: Busca hash");
+        scanf("%d", &d);
+while( 0 < d <= 4){
+        switch(p){
+
+            case 1:
+            printf("\nEscolha o numero que queira colocar na tabela\n");
+            scanf("%d", &a);
+            inserirHash(tab,a);
+            break
+
+            case 2:
+            printf("\nEscolha um numero que queira retirar\n");
+            scanf("%d", &b);
+            removeHash(tab,b);
+            break
+
+            case 3:
+            imprimeHash(tab);
+            break
+
+            case 4:
+            printf("\nEscolha um numero que queira buscar\n")
+            scanf("%d", &c);
+            buscaHash(tab,c);
+            break
+        }
+}
+}
